@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sea-app",
-    "slug": "sea-app",
+    "name": "sea-saw",
+    "slug": "sea-saw",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

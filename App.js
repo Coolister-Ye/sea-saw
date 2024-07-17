@@ -1,29 +1,45 @@
-import DateTimePicker from 'react-native-ui-datepicker';
-import "./global.css";
-import { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from "react";
+import { View, Text } from "react-native";
+import { Button } from 'react-native-paper';
+import { DatePickerModal } from 'react-native-paper-dates';
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { enGB, registerTranslation } from 'react-native-paper-dates'
+registerTranslation('en-GB', enGB)
 
 
-export default function DatePicker({ }) {
+export default function App({ }) {
 
-    const [date, setDate] = useState(undefined);
+    const [date, setDate] = React.useState(undefined);
+    const [open, setOpen] = React.useState(false);
+
+    const onDismissSingle = React.useCallback(() => {
+        setOpen(false);
+    }, [setOpen]);
+
+    const onConfirmSingle = React.useCallback(
+        (params) => {
+            setOpen(false);
+            setDate(params.date);
+        },
+        [setOpen, setDate]
+    );
+
     return (
-        <View className='flex-1 w-[300px] bg-white'>
-          <DateTimePicker
-            mode="single"
-            locale="zh"
-            date={date}
-            onChange={(params) => setDate(params.date)}
-            dayContainerStyle={style.dayContainerStyle}
-            height={400}
-          />
-        </View>
-      );
-
+        <SafeAreaProvider>
+            <View>Hello</View>
+            <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center' }}>
+                <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined">
+                    Pick single date
+                </Button>
+                <DatePickerModal
+                    locale="en-GB"
+                    mode="single"
+                    visible={open}
+                    onDismiss={onDismissSingle}
+                    date={date}
+                    onConfirm={onConfirmSingle}
+                />
+            </View>
+        </SafeAreaProvider>
+    );
 }
-
-const style = StyleSheet.create({
-    dayContainerStyle: {
-        borderRadius: 100
-    }
-})

@@ -1,6 +1,5 @@
 {
-  "name": "sea-app",
-  "main": "expo-router/entry",
+  "name": "sea-saw",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
